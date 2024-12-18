@@ -6,10 +6,13 @@ const DotenvWebpackPlugin = require('dotenv-webpack');
 
 module.exports = {
     mode: 'development', 
-  entry: './src/main.js', 
+  entry:{
+    googleApi: "./src/googleApi.js",
+    app:"./src/main.js",
+  }, 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -33,6 +36,15 @@ module.exports = {
       }
     ],
   },
+  devServer:{
+    static:{
+        directory:path.join(__dirname, "dist")
+    },
+    compress:true,
+    hot:true,
+    open:true,
+    port:8080
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -46,3 +58,5 @@ module.exports = {
   ],
 
 };
+
+console.log("hello")
