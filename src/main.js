@@ -1,23 +1,20 @@
 window.initMap = function() {
     const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.7128, lng: -74.0060 }, // Coordinates for New York City
+        center: { lat: -33.92584, lng: 18.42322 },
         zoom: 13,
       });
     
       // Set up the input element for the search box
       const input = document.getElementById("search-box");
     
-      // Create a Places Autocomplete object and link it to the input element
+ 
       const autocomplete = new google.maps.places.Autocomplete(input);
-    
-      // Bind the Autocomplete object to the map's bounds
+
       autocomplete.bindTo("bounds", map);
     
-      // Add an event listener for when a place is selected from the autocomplete
       autocomplete.addListener("place_changed", function () {
         const place = autocomplete.getPlace();
     
-        // If the selected place doesn't have geometry, it means it is not a valid place
         if (!place.geometry) {
           console.log("No details available for input: '" + place.name + "'");
           return;
@@ -36,13 +33,11 @@ window.initMap = function() {
           map.setZoom(17);
         }
     
-        // Optionally, add a marker at the place's location
         window.marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
         });
     
-        // Optionally, add an InfoWindow to show details about the place
         const infoWindow = new google.maps.InfoWindow({
             content: `
               <div>
